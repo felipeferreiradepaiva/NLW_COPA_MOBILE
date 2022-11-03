@@ -8,8 +8,6 @@ import { Button } from '../components/button';
 
 export function SignIn() {
     const { signIn, user } = useAuth();
-
-    console.log('DADOS DO USUARIO => ', user);
     
     return(
         <Center flex={1} bgColor="gray.900" p={7}>        

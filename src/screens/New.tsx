@@ -1,17 +1,54 @@
 import { useState } from 'react';
-import { Heading, VStack, Text } from "native-base";
+import { Heading, VStack, Text, useToast, Toast } from "native-base";
 import { Header } from "../components/Header";
 import { Input } from "../components/Input";
+//import { Alert } from "react-native"
+
+import { api } from '../services/api'
 
 import Logo from '../assets/logo.svg';
 import { Button } from "../components/Button";
 
-export function New(){
-
+export function New(){    
     const [title, setTitle] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     async function handlePoolCreate(){
+        if(!title.trim()) {
+            //Alert.alert('Atenção!', 'Informe um nome para o seu bolão')
+            return Toast.show({
+                title: 'Atenção!',
+                description: 'Informe um nome para o seu bolão',
+                placement: 'top',
+                bgColor: 'red.500'
+            })
+        }
         
+        try {
+            setIsLoading(true);
+            const pools = await api.post('/pools', { title })
+
+            Toast.show({
+                title: 'Sucesso!',
+                description: 'Seu bolão foi criado.',
+                placement: 'top',
+                bgColor: 'green.500'
+            })
+
+            setTitle('');
+        }catch(error){
+            console.log(error);
+            return Toast.show({
+                title: 'Atenção!',
+                description: 'Erro interno.',
+                placement: 'top',
+                bgColor: 'red.500'
+            });
+        } finally {
+            setIsLoading(false);
+        }
+
+
     }
 
     return(
@@ -35,6 +72,7 @@ export function New(){
                 <Button
                     title="CRIAR MEU BOLÃO"
                     onPress={handlePoolCreate}
+                    isLoading={isLoading}
                 />
 
                 <Text color="gray.200" fontSize="sm" textAlign="center" px={10} mt={4}>

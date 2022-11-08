@@ -7,7 +7,7 @@ export function EmptyPoolList() {
   return (    
     <Row flexWrap="wrap" justifyContent="center">
       <Text color="white" fontSize="sm" textAlign="center">
-        Você ainda não está participando de {'\n'} nenhum bolão, que tal
+        Você ainda não está participando de nenhum bolão, que tal
       </Text>
 
       <Pressable onPress={() => navigate('find')}>
@@ -19,7 +19,7 @@ export function EmptyPoolList() {
       <Text color="white" fontSize="sm" textAlign="center" mx={1}>
         ou
       </Text>
-
+      
       <Pressable onPress={() => navigate('new')}>
         <Text textDecorationLine="underline"  color="yellow.500">
           criar um novo

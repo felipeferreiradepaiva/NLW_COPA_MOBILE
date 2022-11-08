@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 
 import Logo from '../assets/logo.svg';
 
-import { Button } from '../components/Button';
+import { Button } from '../components/Button'
 
 export function SignIn() {
     const { signIn, isUserLoading } = useAuth();

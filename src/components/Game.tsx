@@ -1,6 +1,6 @@
 import { Button, HStack, Text, useTheme, VStack } from 'native-base';
 import { X, Check } from 'phosphor-react-native';
-import { getName } from 'country-list';
+import { getName, overwrite } from 'country-list';
 
 import dayjs from 'dayjs';
 import ptBR from 'dayjs/locale/pt-br';
@@ -58,6 +58,7 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
       <HStack mt={4} w="full" justifyContent="space-between" alignItems="center">
         <Team
           code={data.firstTeamCountryCode}
+          value={data.guess?.firstTeamPoints}
           position="right"
           onChangeText={setFirstTeamPoints}
         />
@@ -66,6 +67,7 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
 
         <Team
           code={data.secondTeamCountryCode}
+          value={data.guess?.secondTeamPoints}
           position="left"
           onChangeText={setSecondTeamPoints}
         />

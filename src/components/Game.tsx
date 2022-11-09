@@ -1,11 +1,12 @@
 import { Button, HStack, Text, useTheme, VStack } from 'native-base';
 import { X, Check } from 'phosphor-react-native';
-import { getName, overwrite } from 'country-list';
+import countries from "i18n-iso-countries";
 
 import dayjs from 'dayjs';
 import ptBR from 'dayjs/locale/pt-br';
 
 import { Team } from './Team';
+import { convertAbsoluteToRem } from 'native-base/lib/typescript/theme/v33x-theme/tools';
 
 interface GuessProps {
   id: string;
@@ -32,10 +33,11 @@ interface Props {
 };
 
 export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessConfirm }: Props) {
-  const { colors, sizes } = useTheme();
-
+  const { colors, sizes } = useTheme();  
   const when = dayjs(data.date).locale(ptBR).format('DD [de] MMMM [de] YYYY [às] HH:00[h] ');
 
+  countries.registerLocale(require("i18n-iso-countries/langs/pt.json"));
+   
   return (
     <VStack
       w="full"
@@ -48,7 +50,7 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
       p={4}      
     >
       <Text color="gray.100" fontFamily="heading" fontSize="sm">
-        {getName(data.firstTeamCountryCode)} vs. {getName(data.secondTeamCountryCode)}
+        {countries.getName(data.firstTeamCountryCode, 'pt')} vs. {countries.getName(data.secondTeamCountryCode, 'pt')}
       </Text>
 
       <Text color="gray.200" fontSize="xs">
